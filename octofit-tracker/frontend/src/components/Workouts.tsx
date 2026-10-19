@@ -1,4 +1,4 @@
-// changed line -step 3
+
 import { useCallback } from 'react';
 import { getJson } from '../api/client.js';
 import { CapabilityCard } from './CapabilityCard.js';

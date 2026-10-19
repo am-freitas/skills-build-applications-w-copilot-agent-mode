@@ -1,4 +1,4 @@
-// changed line -step 3
+
 import { Link, Navigate, Route, Routes } from 'react-router-dom';
 import Activities from './components/Activities.js';
 import Teams from './components/Teams.js';
