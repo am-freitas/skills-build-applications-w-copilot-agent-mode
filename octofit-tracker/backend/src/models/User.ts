@@ -1,11 +1,10 @@
 import { Schema, model } from 'mongoose';
 
-// change test file
 const userSchema = new Schema({
-  name: String,
-  email: String,
+  name: { type: String, required: true, trim: true }, // changed line
+  email: { type: String, required: true, trim: true, lowercase: true }, // changed line
   team: { type: Schema.Types.ObjectId, ref: 'Team' },
-  fitnessGoal: String,
+  fitnessGoal: { type: String, required: true, trim: true }, // changed line
 });
 
 export const User = model('User', userSchema);
