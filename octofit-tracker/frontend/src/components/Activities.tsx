@@ -1,3 +1,4 @@
+// changed line -step 3
 import { CapabilityCard } from './CapabilityCard.js';
 export default function Activities() {
   return <CapabilityCard
