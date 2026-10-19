@@ -1,12 +1,11 @@
 // changed line -step 3
 import { useEffect, useState, type ReactNode } from 'react';
-import { getJson } from '../api/client.js';
 
 type Item = Record<string, unknown>;
 type Props = {
   title: string;
   description: string;
-  path: string;
+  loadData: () => Promise<Record<string, unknown>>;
   collection: string;
   emptyMessage: string;
   renderItem: (item: Item, index: number) => ReactNode;
@@ -16,13 +15,13 @@ type LoadState =
   | { status: 'error'; message: string }
   | { status: 'ready'; items: Item[] };
 
-export function CapabilityCard({ title, description, path, collection, emptyMessage, renderItem }: Props) {
+export function CapabilityCard({ title, description, loadData, collection, emptyMessage, renderItem }: Props) {
   const [state, setState] = useState<LoadState>({ status: 'loading' });
 
   useEffect(() => {
     let active = true;
     setState({ status: 'loading' });
-    getJson<Record<string, unknown>>(path)
+    loadData()
       .then((response) => {
         const data = response[collection];
         if (!Array.isArray(data)) throw new Error('Unexpected API response');
@@ -34,7 +33,7 @@ export function CapabilityCard({ title, description, path, collection, emptyMess
         if (active) setState({ status: 'error', message });
       });
     return () => { active = false; };
-  }, [collection, path]);
+  }, [collection, loadData]);
 
   return <section className="card h-100"><div className="card-body">
     <h2 className="h4">{title}</h2>
