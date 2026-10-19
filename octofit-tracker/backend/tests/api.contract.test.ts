@@ -5,7 +5,6 @@ import mongoose from 'mongoose';
 import { createApp } from '../src/app.js';
 import { Activity, Team, User, Workout } from '../src/models/index.js';
 
-
 let mongo: MongoMemoryServer;
 const app = createApp();
 
